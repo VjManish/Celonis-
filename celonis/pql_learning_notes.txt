@@ -1,0 +1,180 @@
+CELONIS PQL – ORDER-TO-CASH KPI NOTES
+=====================================
+
+Process:
+Order-to-Cash (O2C)
+
+Event Log:
+Case ID   : case_id
+Activity  : activity
+Timestamp : timestamp
+
+Main objects:
+- Customer
+- Sales Order
+- Delivery
+- Invoice
+- Payment
+
+Main events:
+- Order Created
+- Credit Check
+- Order Approved
+- Picking
+- Rework
+- Packing
+- Shipping
+- Delivery
+- Invoice Created
+- Payment
+
+
+1. TOTAL ORDERS
+---------------
+
+COUNT(DISTINCT "o2c_orders"."case_id")
+
+
+2. TOTAL EVENTS
+---------------
+
+COUNT("o2c_events"."activity")
+
+
+3. AVERAGE O2C CYCLE TIME
+-------------------------
+
+Use the case start and case end timestamps.
+
+Conceptually:
+
+AVG(
+    CASE_END("o2c_events"."timestamp")
+    -
+    CASE_START("o2c_events"."timestamp")
+)
+
+
+4. DELAYED ORDERS
+-----------------
+
+Delayed order definition used in this project:
+
+Total process duration > 7 days
+
+Conceptually:
+
+COUNT(
+    CASES WHERE
+    CASE_DURATION("o2c_events") > 7 days
+)
+
+
+5. DELAY RATE
+-------------
+
+Delayed Orders / Total Orders * 100
+
+
+6. REWORK RATE
+--------------
+
+Orders containing the "Rework" activity
+/
+Total Orders
+* 100
+
+
+7. INVOICE → PAYMENT TIME
+-------------------------
+
+Measure the duration between:
+
+Invoice Created
+        ↓
+Payment
+
+
+8. ORDER → DELIVERY TIME
+------------------------
+
+Measure the duration between:
+
+Order Created
+        ↓
+Delivery
+
+
+9. PROCESS VARIANTS
+-------------------
+
+Identify different activity sequences.
+
+Example:
+
+Variant 1:
+Order Created
+→ Credit Check
+→ Order Approved
+→ Picking
+→ Packing
+→ Shipping
+→ Delivery
+→ Invoice Created
+→ Payment
+
+Variant 2:
+
+Order Created
+→ Credit Check
+→ Order Approved
+→ Picking
+→ Rework
+→ Picking
+→ Packing
+→ Shipping
+→ Delivery
+→ Invoice Created
+→ Payment
+
+
+10. REWORKED ORDERS
+-------------------
+
+Count cases containing:
+
+"Rework"
+
+
+11. WAREHOUSE DELAY RATE
+------------------------
+
+Group delayed cases by:
+
+warehouse
+
+
+12. SHIPPING METHOD DELAY RATE
+-----------------------------
+
+Group delayed cases by:
+
+shipping_method
+
+
+13. CUSTOMER TYPE DELAY RATE
+---------------------------
+
+Group delayed cases by:
+
+customer_type
+
+
+IMPORTANT
+=========
+
+The exact executable PQL syntax depends on the Celonis data model
+and the version/environment being used.
+
+These notes should not be presented as executed Celonis PQL until
+the queries have been created and tested inside Celonis.

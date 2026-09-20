@@ -1,0 +1,3 @@
+variant,order_count,percentage
+Order Created → Credit Check → Order Approved → Picking → Packing → Shipping → Delivery → Invoice Created → Payment,4611,92.22
+Order Created → Credit Check → Order Approved → Picking → Rework → Picking → Packing → Shipping → Delivery → Invoice Created → Payment,389,7.779999999999999

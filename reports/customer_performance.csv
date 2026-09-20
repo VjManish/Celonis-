@@ -1,0 +1,4 @@
+customer_type,orders,average_cycle_hours,delayed_orders,delay_percentage
+Enterprise,1685,188.94,1085,64.39
+Retail,1635,144.76,561,34.31
+SMB,1680,143.69,555,33.04

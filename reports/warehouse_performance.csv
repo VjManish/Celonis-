@@ -1,0 +1,5 @@
+warehouse,orders,average_cycle_hours,median_cycle_hours,delayed_orders,rework_orders,delay_percentage,rework_percentage
+WH_EAST,1285,158.98,158.53,565,107,43.97,8.33
+WH_NORTH,1277,155.98,155.73,534,101,41.82,7.91
+WH_SOUTH,1173,157.49,156.57,505,88,43.05,7.5
+WH_WEST,1265,164.62,164.52,597,93,47.19,7.35

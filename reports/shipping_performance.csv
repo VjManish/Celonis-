@@ -1,0 +1,4 @@
+shipping_method,orders,average_cycle_hours,delayed_orders,delay_percentage
+Express,1678,152.5,669,39.87
+Priority,1645,143.0,530,32.22
+Standard,1677,182.06,1002,59.75
